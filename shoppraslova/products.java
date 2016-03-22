@@ -77,7 +77,7 @@ System.out.println(" "+counts.get(k));
     else System.out.println("Товар не найден");
         
         }  catch (Exception e) {System.out.println("Ошибка");}
-        System.out.println(counts.get(p));    
+          
         System.out.println("1.Назад\n2.Продолжить покупки\n");
         String choice ;
         choice = BR.readLine();
@@ -89,7 +89,10 @@ System.out.println(" "+counts.get(k));
             }
    }}
 
- /*  public void deliveryproducts() throws IOException{
+  public void deliveryproducts() throws IOException{
+   boolean flag = true;
+        while(flag){
+            try{
        System.out.println("Введите id поставляемого товара");
        Scanner scandelivery = new Scanner(System.in);
   
@@ -99,27 +102,36 @@ System.out.println(" "+counts.get(k));
        System.out.println("Введите количество поставляемого товара");
        deliverycounts = scandelivery.nextInt();
        
-        for (int k=0; k<i; i++)
-        if (ids.get(k)== deliveryid)
-            p++;
+       if(ids.contains(deliveryid))
+    { p = ids.indexOf(deliveryid);
+      counts.set(p, counts.get(p)+deliverycounts);
+      
+    }
+    else System.out.println("Товар не найден");
         
-        if (p==0)
-        System.out.println("Неизвестный id");
-        
-       */
+   }catch (Exception e) {System.out.println("Ошибка");}
+          
+        System.out.println("1.Назад\n2.Продолжить покупки\n");
+        String choice ;
+        choice = BR.readLine();
+            
+            switch (choice){
+            case "1" : 
+            flag = !flag;
+            break;
+            }
+   }
+       
         
        
-   //}
+   }
    
    public void salestable() throws IOException {
 /*POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
 HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
 HSSFSheet sheet = workBook.getSheetAt(0);
-
 Iterator<Row> rows = sheet.rowIterator();
-
 rows.next();
-
 while (rows.hasNext()) {
 HSSFRow row = (HSSFRow) rows.next();
 int idsale = (int) row.getCell(0).getNumericCellValue();
@@ -127,17 +139,14 @@ int pricesale = (int) row.getCell(1).getNumericCellValue();
 int countsale = (int) row.getCell(2).getNumericCellValue();
 String namesale = row.getCell(3).getStringCellValue();
 s++;
-
 idssale.add(idsale);
 pricessale.add(pricesale);
 countssale.add(countsale);
 namessale.add(namesale);
-
 }
 for(int k=0; k<s; k++) {
 System.out.print(idssale.get(k));
 System.out.print(" "+pricessale.get(k));
-
     }
 */       
    }

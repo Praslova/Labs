@@ -38,7 +38,7 @@ public class menu {
                       
             break;
             
-            case "2" : //punkttwo.deliveryproducts();
+            case "2" : punktone.deliveryproducts();
                 
             break;
             
