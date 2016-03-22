@@ -12,15 +12,15 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class products{
    BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
-   ArrayList<String> names = new ArrayList();
-   ArrayList<Integer> ids = new ArrayList();
-   ArrayList<Integer> counts = new ArrayList();
- 
-   ArrayList<Integer> prices = new ArrayList();
-   ArrayList<Integer> pricessale = new ArrayList();
+   private ArrayList<String> names = new ArrayList<>();
+   private ArrayList<Integer> ids = new ArrayList<>();
+   private ArrayList<Integer> counts = new ArrayList<>();
+   private ArrayList<Integer> prices = new ArrayList<>();
+   
+  /* ArrayList<Integer> pricessale = new ArrayList();
    ArrayList<Integer> idssale = new ArrayList();
    ArrayList<Integer> countssale = new ArrayList();
-   ArrayList<String> namessale = new ArrayList();
+   ArrayList<String> namessale = new ArrayList();*/
 int i;
 int s=0;
 int p=0;
@@ -77,7 +77,7 @@ System.out.println(" "+counts.get(k));
     else System.out.println("Товар не найден");
         
         }  catch (Exception e) {System.out.println("Ошибка");}
-            
+        System.out.println(counts.get(p));    
         System.out.println("1.Назад\n2.Продолжить покупки\n");
         String choice ;
         choice = BR.readLine();
@@ -149,15 +149,15 @@ for (int j=0; j<ids.size();++j){
 HSSFRow r = (HSSFRow) sheet.createRow(j);
 r.createCell(0).setCellValue(ids.get(j));
 r.createCell(1).setCellValue(names.get(j));
-r.createCell(2).setCellValue(counts.get(j));
-r.createCell(3).setCellValue(prices.get(j));
+r.createCell(2).setCellValue(prices.get(j));
+r.createCell(3).setCellValue(counts.get(j));
    }
 workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
 workBook.close();
    }
    
-  /* public void infosales(){
-       Scanner scan = new Scanner(System.in);
+   public void infosales(){
+    /*   Scanner scan = new Scanner(System.in);
        int ChoiceSaleid = scan.nextInt();
     
        for(int k=0; k<s; k++)
@@ -166,6 +166,6 @@ workBook.close();
          System.out.print(" "+namessale.get(k));
          System.out.print(" "+countssale.get(k));
          System.out.print(" "+pricessale.get(k));}
-       
-   }*/
+     */  
+   }
     }

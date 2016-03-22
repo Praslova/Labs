@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class menu {
+     products punktone = new products();
+       
     BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
     public void MenuShow() throws IOException{
         
@@ -25,10 +27,7 @@ public class menu {
         choice = BR.readLine();
        
         
-        products punktone = new products();
-        products punkttwo = new products();
-        products punktthree = new products();
-        products punktfour = new products();
+       
         
        
         
@@ -40,16 +39,17 @@ public class menu {
             break;
             
             case "2" : //punkttwo.deliveryproducts();
+                
             break;
             
             case "3" : 
-            punktthree.salestable();
+            punktone.salestable();
             System.out.println("Введите id продажи для вывода информации");
             //punktthree.infosales();
             break;
             
             case "4":  
-            punktfour.Import();   
+            punktone.Import();   
             flag = !flag; 
             break;
             
