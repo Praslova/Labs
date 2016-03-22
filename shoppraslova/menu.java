@@ -44,8 +44,9 @@ public class menu {
             
             case "3" : 
             punktone.salestable();
-            System.out.println("Введите id продажи для вывода информации");
-            //punktthree.infosales();
+            System.out.println("\nВведите id продажи для вывода информации");
+            punktone.infosales();
+             System.out.println("\n");
             break;
             
             case "4":  

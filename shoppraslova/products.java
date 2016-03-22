@@ -12,18 +12,20 @@ import org.apache.poi.ss.usermodel.Row;
 
 public class products{
    BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
-   private ArrayList<String> names = new ArrayList<>();
-   private ArrayList<Integer> ids = new ArrayList<>();
-   private ArrayList<Integer> counts = new ArrayList<>();
-   private ArrayList<Integer> prices = new ArrayList<>();
+    ArrayList<String> names = new ArrayList<>();
+    ArrayList<Integer> ids = new ArrayList<>();
+    ArrayList<Integer> counts = new ArrayList<>();
+    ArrayList<Integer> prices = new ArrayList<>();
    
-  /* ArrayList<Integer> pricessale = new ArrayList();
+   ArrayList<Integer> pricessale = new ArrayList();
    ArrayList<Integer> idssale = new ArrayList();
    ArrayList<Integer> countssale = new ArrayList();
-   ArrayList<String> namessale = new ArrayList();*/
+   ArrayList<Integer> namessale = new ArrayList();
 int i;
 int s=0;
 int p=0;
+ int j = 0;
+
     public void Filetable() throws IOException  {
         
 POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
@@ -57,8 +59,12 @@ System.out.println(" "+counts.get(k));
 
    public void  Sale () throws IOException
    { boolean flag = true;
+  
+     HSSFWorkbook workBook = new HSSFWorkbook();
+      HSSFSheet sheet = workBook.createSheet(); 
+      
         while(flag){
-            try{
+            try{ 
        System.out.println("Введите id товара");
    
     Scanner scanner = new Scanner(System.in);
@@ -72,12 +78,23 @@ System.out.println(" "+counts.get(k));
       if ((counts.get(p)-ChoiceProductscount)<0)
           System.out.println("Недостаточно товара на складе");
       else {counts.set(p, counts.get(p)-ChoiceProductscount);
-      }
+      
+      
+    
+HSSFRow r = (HSSFRow) sheet.createRow(j);
+r.createCell(0).setCellValue(j);
+r.createCell(1).setCellValue(prices.get(ChoiceProductsid)*ChoiceProductscount);
+r.createCell(2).setCellValue(ChoiceProductscount);
+r.createCell(3).setCellValue(ChoiceProductsid);
+   
+workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
+workBook.close();
+      j++;}
     }
     else System.out.println("Товар не найден");
         
         }  catch (Exception e) {System.out.println("Ошибка");}
-          
+        
         System.out.println("1.Назад\n2.Продолжить покупки\n");
         String choice ;
         choice = BR.readLine();
@@ -127,17 +144,17 @@ System.out.println(" "+counts.get(k));
    }
    
    public void salestable() throws IOException {
-/*POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
+POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
 HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
 HSSFSheet sheet = workBook.getSheetAt(0);
 Iterator<Row> rows = sheet.rowIterator();
-rows.next();
+
 while (rows.hasNext()) {
 HSSFRow row = (HSSFRow) rows.next();
 int idsale = (int) row.getCell(0).getNumericCellValue();
 int pricesale = (int) row.getCell(1).getNumericCellValue();
 int countsale = (int) row.getCell(2).getNumericCellValue();
-String namesale = row.getCell(3).getStringCellValue();
+int namesale = (int) row.getCell(3).getNumericCellValue();
 s++;
 idssale.add(idsale);
 pricessale.add(pricesale);
@@ -146,9 +163,10 @@ namessale.add(namesale);
 }
 for(int k=0; k<s; k++) {
 System.out.print(idssale.get(k));
-System.out.print(" "+pricessale.get(k));
+System.out.println(" "+pricessale.get(k));
+
     }
-*/       
+      
    }
    public void Import() throws IOException{
 HSSFWorkbook workBook = new HSSFWorkbook();
@@ -166,15 +184,17 @@ workBook.close();
    }
    
    public void infosales(){
-    /*   Scanner scan = new Scanner(System.in);
+      Scanner scan = new Scanner(System.in);
        int ChoiceSaleid = scan.nextInt();
     
        for(int k=0; k<s; k++)
        if (idssale.get(k)==ChoiceSaleid) 
        { System.out.print(idssale.get(k));
+       System.out.print(" "+pricessale.get(k));
          System.out.print(" "+namessale.get(k));
-         System.out.print(" "+countssale.get(k));
-         System.out.print(" "+pricessale.get(k));}
-     */  
+         System.out.println(" "+countssale.get(k));
+        
+         }
+     
    }
     }
