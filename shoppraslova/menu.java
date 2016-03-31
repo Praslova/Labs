@@ -13,7 +13,9 @@ public class menu {
      products punktone = new products();
        
     BufferedReader BR = new BufferedReader(new InputStreamReader(System.in));
-    public void MenuShow() throws IOException{
+    public void MenuShow() throws IOException{ 
+        punktone.Filestoreread();
+        punktone.Filesaleread();
         
         boolean flag = true;
         while(flag){
@@ -44,13 +46,14 @@ public class menu {
             
             case "3" : 
             punktone.salestable();
-            System.out.println("\nВведите id продажи для вывода информации");
+            
             punktone.infosales();
-             System.out.println("\n");
+            // System.out.println("\n");
             break;
             
             case "4":  
-            punktone.Import();   
+            punktone.Importstore();   
+            punktone.Importsale();
             flag = !flag; 
             break;
             
