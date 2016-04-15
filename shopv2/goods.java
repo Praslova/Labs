@@ -11,10 +11,10 @@ package shopv2;
  */
 public class goods {
 
-    private int id = -1;
+    private int id = 0;
     private String name = "";
-    private int price = -1;
-    private int count = -1;
+    private int price = 0;
+    private int count = 0;
 
     public goods(int id, String name, int price, int count) {
         this.id = id;

@@ -19,10 +19,12 @@ public class ShopV2 {
      */
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
+        try {
+            menu MenuShop = new menu(); // объект класса menu
+            MenuShop.MenuShow(); // обращение к методу MenuShow
+        } catch (Exception e) {
+            System.out.println("Ошибка");
+        }
 
-        menu MenuShop = new menu(); // объект класса menu
-
-        MenuShop.MenuShow(); // обращение к методу MenuShow
     }
-
 }

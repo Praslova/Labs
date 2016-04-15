@@ -35,46 +35,56 @@ public class work {
     int a = 0; // счетчик количества продаж 
 
     public void Filestoreread() throws IOException { //считывание текста из файла товаров магазина
-        POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
-        HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
-        HSSFSheet sheet = workBook.getSheetAt(0);
 
-        Iterator<Row> rows = sheet.rowIterator();
+        try {
+            POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
+            HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
+            HSSFSheet sheet = workBook.getSheetAt(0);
 
-        while (rows.hasNext()) {
-            HSSFRow row = (HSSFRow) rows.next();
-            int id = (int) row.getCell(0).getNumericCellValue();
-            String name = (String) row.getCell(1).getStringCellValue();
-            int count = (int) row.getCell(3).getNumericCellValue();
-            int price = (int) row.getCell(2).getNumericCellValue();
+            Iterator<Row> rows = sheet.rowIterator();
 
-            goods p = new goods(id, name, price, count);
-            this.goodsID.put(p.getID(), p);
-            ids.add(id);
+            while (rows.hasNext()) {
+                HSSFRow row = (HSSFRow) rows.next();
+                int id = (int) row.getCell(0).getNumericCellValue();
+                String name = (String) row.getCell(1).getStringCellValue();
+                int count = (int) row.getCell(3).getNumericCellValue();
+                int price = (int) row.getCell(2).getNumericCellValue();
 
-            z++;
+                goods p = new goods(id, name, price, count);
+                this.goodsID.put(p.getID(), p);
+                ids.add(id);
 
+                z++;
+
+            }
+        } catch (Exception e) {
+            System.out.println("Ошибка");
         }
     }
 
     public void Filesaleread() throws IOException { //считывание из файла со списком продаж
-        POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
-        HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
-        HSSFSheet sheet = workBook.getSheetAt(0);
 
-        Iterator<Row> rows = sheet.rowIterator();
+        try {
+            POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
+            HSSFWorkbook workBook = new HSSFWorkbook(fileSystem);
+            HSSFSheet sheet = workBook.getSheetAt(0);
 
-        while (rows.hasNext()) {
-            HSSFRow row = (HSSFRow) rows.next();
-            int id = (int) row.getCell(0).getNumericCellValue();
-            int idtov = (int) row.getCell(1).getNumericCellValue();
-            int price = (int) row.getCell(2).getNumericCellValue();
-            String name = (String) row.getCell(3).getStringCellValue();
-            int count = (int) row.getCell(4).getNumericCellValue();
+            Iterator<Row> rows = sheet.rowIterator();
 
-            salegoods q = new salegoods(id, idtov, price, name, count);
-            this.salesID.put(q.getID(), q);
-            a++;
+            while (rows.hasNext()) {
+                HSSFRow row = (HSSFRow) rows.next();
+                int id = (int) row.getCell(0).getNumericCellValue();
+                int idtov = (int) row.getCell(1).getNumericCellValue();
+                int price = (int) row.getCell(2).getNumericCellValue();
+                String name = (String) row.getCell(3).getStringCellValue();
+                int count = (int) row.getCell(4).getNumericCellValue();
+
+                salegoods q = new salegoods(id, idtov, price, name, count);
+                this.salesID.put(q.getID(), q);
+                a++;
+            }
+        } catch (Exception e) {
+            System.out.println("Ошибка");
         }
     }
 
@@ -178,7 +188,7 @@ public class work {
     public void salestable() {
         for (int i = 1; i <= a; i++) {
             salegoods t = this.salesID.get(i);
-            t.GoodsShow();
+            t.GoodsSaleShow();
         }
     }
 
@@ -213,43 +223,53 @@ public class work {
     }
 
     public void Importstore() throws IOException {
-        HSSFWorkbook workBook = new HSSFWorkbook();
-        HSSFSheet sheet = workBook.createSheet();
-        Set<Integer> keys = goodsID.keySet();
 
-        int nr = 0;
-        for (Integer key : keys) {
-            HSSFRow r = sheet.createRow(nr);
-            nr += 1;
-            goods p = goodsID.get(key);
+        try {
+            HSSFWorkbook workBook = new HSSFWorkbook();
+            HSSFSheet sheet = workBook.createSheet();
+            Set<Integer> keys = goodsID.keySet();
 
-            r.createCell(0).setCellValue(p.getID());
-            r.createCell(1).setCellValue(p.getName());
-            r.createCell(2).setCellValue(p.getPrice());
-            r.createCell(3).setCellValue(p.getCount());
+            int nr = 0;
+            for (Integer key : keys) {
+                HSSFRow r = sheet.createRow(nr);
+                nr += 1;
+                goods p = goodsID.get(key);
+
+                r.createCell(0).setCellValue(p.getID());
+                r.createCell(1).setCellValue(p.getName());
+                r.createCell(2).setCellValue(p.getPrice());
+                r.createCell(3).setCellValue(p.getCount());
+            }
+            workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
+            workBook.close();
+        } catch (Exception e) {
+            System.out.println("Ошибка");
         }
-        workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\store.xls"));
-        workBook.close();
     }
 
     public void Importsale() throws IOException {
-        HSSFWorkbook workBook = new HSSFWorkbook();
-        HSSFSheet sheet = workBook.createSheet();
-        Set<Integer> keys = salesID.keySet();
 
-        int nr = 0;
-        for (Integer key : keys) {
-            HSSFRow r = sheet.createRow(nr);
-            nr += 1;
-            salegoods p = salesID.get(key);
-            
-            r.createCell(0).setCellValue(p.getID());
-            r.createCell(1).setCellValue(p.getIDtov());
-            r.createCell(2).setCellValue(p.getName());
-            r.createCell(3).setCellValue(p.getPrice());
-            r.createCell(4).setCellValue(p.getCount());
+        try {
+            HSSFWorkbook workBook = new HSSFWorkbook();
+            HSSFSheet sheet = workBook.createSheet();
+            Set<Integer> keys = salesID.keySet();
+
+            int nr = 0;
+            for (Integer key : keys) {
+                HSSFRow r = sheet.createRow(nr);
+                nr += 1;
+                salegoods p = salesID.get(key);
+
+                r.createCell(0).setCellValue(p.getID());
+                r.createCell(1).setCellValue(p.getIDtov());
+                r.createCell(2).setCellValue(p.getPrice());
+                r.createCell(3).setCellValue(p.getName());
+                r.createCell(4).setCellValue(p.getCount());
+            }
+            workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
+            workBook.close();
+        } catch (Exception e) {
+            System.out.println("Ошибка");
         }
-        workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
-        workBook.close();
     }
 }

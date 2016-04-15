@@ -28,8 +28,10 @@ public class menu {
 
             try {
 
-                System.out.println(" 1.Продажа товара\n 2.Поставка товара\n 3.Данные по продажам\n 4.Выход");
+                System.out.println(" 1.Продажа товара\n 2.Поставка товара\n 3.Данные по продажам\n 4.Информация о товарах\n 5.Выход");
+                System.out.println("\n");
                 System.out.println("Выберите пункт меню:");
+                
 
                 String choice;
                 choice = BR.readLine();
@@ -37,7 +39,6 @@ public class menu {
                 switch (choice) {
                     case "1":
                         punktone.Filetable();
-
                         punktone.Sale();
                         System.out.println("\n");
                         break;
@@ -54,7 +55,11 @@ public class menu {
                         break;
 
                     case "4":
-                         punktone.Importstore();   
+                        punktone.Filetable();
+                        System.out.println("\n");
+                        break;
+                    case "5":
+                        punktone.Importstore();
                         punktone.Importsale();
                         flag = !flag;
                         break;
