@@ -242,11 +242,12 @@ public class work {
             HSSFRow r = sheet.createRow(nr);
             nr += 1;
             salegoods p = salesID.get(key);
-
+            
             r.createCell(0).setCellValue(p.getID());
-            r.createCell(1).setCellValue(p.getName());
-            r.createCell(2).setCellValue(p.getPrice());
-            r.createCell(3).setCellValue(p.getCount());
+            r.createCell(1).setCellValue(p.getIDtov());
+            r.createCell(2).setCellValue(p.getName());
+            r.createCell(3).setCellValue(p.getPrice());
+            r.createCell(4).setCellValue(p.getCount());
         }
         workBook.write(new FileOutputStream("C:\\Users\\Ксю\\Desktop\\sale.xls"));
         workBook.close();

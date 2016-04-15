@@ -36,6 +36,9 @@ public class salegoods {
         return this.id;
     }
 
+     public int getIDtov() {
+        return this.idtov;
+    }
     public String getName() {
         return this.name;
     }
